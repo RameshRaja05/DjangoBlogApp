@@ -1,0 +1,10 @@
+.env
+db.sqlite3
+sample.text
+env
+static
+uploads/images
+blog/__pycache__
+blog/migrations/__pycache__
+MYApp/__pycache__
+blog/static
