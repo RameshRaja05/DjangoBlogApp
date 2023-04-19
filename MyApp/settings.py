@@ -27,10 +27,10 @@ SECRET_KEY = environ.get('SECRET_KEY')
 DEBUG = 'RENDER' not in environ
 
 ALLOWED_HOSTS = [
+environ.get('RENDER_EXTERNAL_HOSTNAME')
 ]
-RENDER_EXTERNAL_HOSTNAME = environ.get('RENDER_EXTERNAL_HOSTNAME')
-if RENDER_EXTERNAL_HOSTNAME:    
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+
+
 
 
 # Application definition
