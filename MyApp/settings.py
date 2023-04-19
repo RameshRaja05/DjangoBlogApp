@@ -27,7 +27,7 @@ SECRET_KEY = environ.get('SECRET_KEY')
 DEBUG = False
 
 ALLOWED_HOSTS = [
-'djangoblogapp.onrender.com
+'djangoblogapp.onrender.com'
 ]
 
 
