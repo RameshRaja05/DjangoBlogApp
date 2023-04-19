@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 from os import environ,path
-import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -36,7 +35,7 @@ if RENDER_EXTERNAL_HOSTNAME:    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -82,11 +81,20 @@ WSGI_APPLICATION = 'MyApp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': dj_database_url.config(conn_max_age=600 )
+# DATABASES = {
+#     'default': dj_database_url.config(default='postgres://djangoblogapp_72wz_user:8mk299wHNbnYN3biYyiBwyzaZmrAnE1g@dpg-cgvpha0dh87joktisvng-a/djangoblogapp_72wz',conn_max_age=600 )
+# }
+
+DATABASES={
+    'default':{
+    'ENGINE':'django.db.backends.postgresql',
+    'NAME':environ.get('DB_NAME'),
+    'USER':environ.get('DB_USER'),
+    'PASSWORD':environ.get('DB_PASSWORD'),
+    'HOST':environ.get('DB_HOST'),
+    'PORT':'5432'
+    }
 }
-
-
 
 
 # Password validation
@@ -123,15 +131,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_ROOT=BASE_DIR/'staticfiles'
 STATIC_URL = 'static/'
 
-if not DEBUG:    # Tell Django to copy statics to the `staticfiles` directory
+# Tell Django to copy statics to the `staticfiles` directory
     # in your application directory on Render.
-    STATIC_ROOT = path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = path.join(BASE_DIR, 'staticfiles')
     # Turn on WhiteNoise storage backend that takes care of compressing static files
     # and creating unique names for each version so they can safely be cached forever.
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 
